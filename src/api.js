@@ -1,17 +1,11 @@
 import axios from 'axios';
 
-// Determine the base URL based on the environment
+// Use environment variable for base URL, fallback to localhost for development
 const getBaseUrl = () => {
-  if (import.meta.env.PROD) {
-    // In production, use the production URL.
-    return 'https://agromind-backend-g6g9beexdpg8heeg.uaenorth-01.azurewebsites.net/api';
-  }
-  // In development, use a local default.
-  return 'https://localhost:7057/api';
+  return import.meta.env.VITE_API_BASE_URL || 'https://localhost:7057/api';
 };
 
 const BASE_URL = getBaseUrl();
-
 const getAuthHeaders = () => {
   const token = localStorage.getItem("token");
   return token
